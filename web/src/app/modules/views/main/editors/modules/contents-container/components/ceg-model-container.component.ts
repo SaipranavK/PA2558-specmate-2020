@@ -45,7 +45,6 @@ export class CEGModelContainer extends TestSpecificationContentContainerBase<CEG
     public async createElement(name: string): Promise<CEGModel> {
         const factory: ModelFactoryBase = new CEGModelFactory(this.dataService);
         const element = await factory.create(this.parent, true, Id.uuid, name) as CEGModel;
-
         let description = this.modelDescription;
         if (description == undefined) {
             description = '';

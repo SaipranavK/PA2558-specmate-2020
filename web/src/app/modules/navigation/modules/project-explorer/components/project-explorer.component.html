@@ -3,13 +3,13 @@
         <div class="input-group input-group-sm">
             <div class="input-group-prepend" title="{{'search' | translate}}">
                 <span class="input-group-text">
-                    <i class="fa fa-search"></i>
+                    <i class="fas fa-search"></i>
                 </span>
             </div>
             <input #searchBox class="form-control form-control-sm" type="search" (keyup)="search(searchBox.value)" />
             <div class="input-group-append" title="{{'search' | translate}}">
                 <button class="btn btn-sm btn-outline-danger clear-button" (click)="searchBox.value=''" title="{{'searchClear'
-            | translate}}"><i class="fa fa-times"></i></button>
+            | translate}}"><i class="fas fa-times"></i></button>
             </div>
         </div>
         <ul role="tablist" class="nav nav-tabs justify-content-start" *ngIf="!searchBox.value" id="explorer">
@@ -32,7 +32,7 @@
                     (click)="switchToRecycleBin()" class="nav-link" id="ngb-tab-1" aria-disabled="false"
                     [attr.aria-expanded]="currentActiveTab === ActiveTab.recycleBin ? 'true' : 'false'"
                     [attr.aria-controls]="currentActiveTab === ActiveTab.recycleBin ? 'ngb-tab-1-panel' : null">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i class="fas fa-trash" aria-hidden="true"></i>
                 </button>
             </li>
         </ul>
@@ -50,7 +50,7 @@
                 [currentElement]="currentElement" [withExpand]="true"></element-tree>
             <li *ngIf="canLoadMoreProjectFolders">
                 <button (click)="loadMoreProjectFolders()" class="btn btn-sm btn-outline-primary btn-sm">
-                    <i class="fa fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
+                    <i class="fas fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
                 </button>
             </li>
         </ul>
@@ -59,7 +59,7 @@
                 [currentElement]="currentElement" [withExpand]="true" [library]="true"></element-tree>
             <li *ngIf="canLoadMoreLibraryFolders">
                 <button (click)="loadMoreLibraryFolders()" class="btn btn-sm btn-outline-primary btn-sm">
-                    <i class="fa fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
+                    <i class="fas fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
                 </button>
             </li>
         </ul>
@@ -68,7 +68,7 @@
                 [currentElement]="currentElement" [withExpand]="true" [recycleBin]="true"></element-tree>
             <li *ngIf="canLoadMoreRecycleBinFoldersProject">
                 <button (click)="loadMoreReycleBinFoldersProject()" class="btn btn-sm btn-outline-primary btn-sm">
-                    <i class="fa fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
+                    <i class="fas fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
                 </button>
             </li>
         </ul>
@@ -78,7 +78,7 @@
             </element-tree>
             <li *ngIf="canLoadMoreRecycleBinFoldersLibrary">
                 <button (click)="loadMoreReycleBinFoldersLibrary()" class="btn btn-sm btn-outline-primary btn-sm">
-                    <i class="fa fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
+                    <i class="fas fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
                 </button>
             </li>
         </ul>

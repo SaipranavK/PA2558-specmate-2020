@@ -1,7 +1,7 @@
 <div class="card">
     <h5 class="card-header">{{'ProcessModels' | translate}}</h5>
     <div *ngIf="contents === undefined" class="card-body">
-        <i class="fa fa-spinner fa-pulse fa-fw text-muted"></i>
+        <i class="fas fa-spinner fa-pulse fa-fw text-muted"></i>
     </div>
     <div *ngIf="contents && contents.length == 0" class="card-body">
         <span class="text-muted">
@@ -16,7 +16,7 @@
                         <td>
                             <a [navigationTarget]="element"
                                 id="{{'requirement-' + element.name + '-show-process-button'}}">
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;{{element.name}}
+                                <i class="fas fa-angle-right" aria-hidden="true"></i>&nbsp;{{element.name}}
                             </a>
                             &nbsp;
                             <span class="text-muted">{{element.description | truncate: 60}}</span>
@@ -29,17 +29,17 @@
                             <button id="{{'requirement-' + element.name + '-copyprocess-button'}}"
                                 title="{{'copy' | translate}}" (click)="copy(element)"
                                 class="btn btn-sm expand btn-outline-primary">
-                                <i class="fa fa-copy" aria-hidden="true"></i>&nbsp;{{'copy' | translate}}
+                                <i class="fas fa-copy" aria-hidden="true"></i>&nbsp;{{'copy' | translate}}
                             </button>
                             <button id="{{'requirement-' + element.name + '-duplicateprocess-button'}}"
                                 title="{{'duplicate' | translate}}" (click)="duplicate(element)"
                                 class="btn btn-sm expand btn-outline-primary">
-                                <i class="fa fa-clone" aria-hidden="true"></i>&nbsp;{{'duplicate' | translate}}
+                                <i class="fas fa-clone" aria-hidden="true"></i>&nbsp;{{'duplicate' | translate}}
                             </button>
                             <button id="{{'requirement-' + element.name + '-deleteprocess-button'}}"
                                 title="{{'delete' | translate}}" (click)="recycle(element)"
                                 class="btn btn-sm expand btn-outline-danger">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
@@ -56,9 +56,8 @@
                     <div class="input-group-append">
                         <button id="requirement-createprocess-button" title="{{'createProcess' | translate}}"
                             (click)="create(newNameInput.value)" class="btn btn-sm expand btn-outline-primary"
-                            [disabled]="!isCreateButtonEnabled(newNameInput.value)"
-                            [class.disabled]="!isCreateButtonEnabled(newNameInput.value)">
-                            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{'createProcess' | translate}}
+                        >
+                            <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;{{'createProcess' | translate}}
                         </button>
                     </div>
                 </div>
@@ -75,7 +74,7 @@
                             (click)="paste(pasteNameInput.value)" class="btn btn-sm expand btn-outline-primary"
                             [disabled]="!canPaste || !validPattern(pasteNameInput.value)"
                             [class.disabled]="!canPaste || !validPattern(pasteNameInput.value)">
-                            <i class="fa fa-paste" aria-hidden="true"></i>&nbsp;{{'paste' | translate}}
+                            <i class="fas fa-paste" aria-hidden="true"></i>&nbsp;{{'paste' | translate}}
                         </button>
                     </div>
                 </div>

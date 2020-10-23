@@ -1,7 +1,7 @@
 <div class="card">
     <h5 class="card-header">{{'Subfolders' | translate}}</h5>
     <div *ngIf="contents === undefined" class="card-body">
-        <i class="fa fa-spinner fa-pulse fa-fw text-muted"></i>
+        <i class="fas fa-spinner fa-pulse fa-fw text-muted"></i>
     </div>
     <div *ngIf="contents && contents.length == 0" class="card-body">
         <span class="text-muted">
@@ -15,7 +15,7 @@
                     <tr>
                         <td>
                             <a [navigationTarget]="element">
-                                <i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;{{element.name}}
+                                <i class="fas fa-angle-right" aria-hidden="true"></i>&nbsp;{{element.name}}
                             </a>
                             &nbsp;
                             <span class="text-muted">{{element.description | truncate: 60}}</span>
@@ -24,7 +24,7 @@
                             <button id="{{'folder-' + element.name + '-deletefolder-button'}}"
                                 title="{{'delete' | translate}}" (click)="recycle(element)"
                                 class="btn btn-sm expand btn-outline-danger">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <i class="fas fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
@@ -43,7 +43,7 @@
                             (click)="create(newNameInput.value)" class="btn btn-sm expand btn-outline-primary"
                             [disabled]="!isCreateButtonEnabled(newNameInput.value)"
                             [class.disabled]="!isCreateButtonEnabled(newNameInput.value)">
-                            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{'createFolder' | translate}}
+                            <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;{{'createFolder' | translate}}
                         </button>
                     </div>
                 </div>

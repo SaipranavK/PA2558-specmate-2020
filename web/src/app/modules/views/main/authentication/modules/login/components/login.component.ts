@@ -73,4 +73,61 @@ export class Login implements OnInit {
     public get isErrorLoggedOut(): boolean {
         return this.auth.errorLoggedOut;
     }
+
+    introMethod() {
+        // import IntroJS
+        const IntroJs = require("../../../../../../../../../node_modules/intro.js/intro")
+        let intro = IntroJs();
+        console.log("inside intro.js");
+        intro.setOptions({
+            steps: [
+                {
+                    intro: "Welcome to Specmate"
+                },
+                {
+                    element: "#step1",
+                    intro:
+                        "This is the Login page of the application. To take a quick tour, follow these steps.",
+                    position: "right"
+                },
+                {
+                    element: "#step2",
+                    intro:
+                        "To use the demo project, enter username as 'test'",
+                    position: "bottom"
+                },
+                {
+                    element: "#step3",
+                    intro:
+                        "Enter password as 'test'",
+                    position: "bottom"
+                },
+                {
+                    element: "#step4",
+                    intro:
+                        "Choose project as 'test-data'",
+                    position: "bottom"
+                },
+                {
+                    element: "#step5",
+                    intro:
+                        "Click this button to change language",
+                    position: "bottom"
+                },
+                {
+                    element: "#step6",
+                    intro:
+                        "Click Login when done",
+                    position: "right"
+                }
+            ],
+            showProgress: true,
+            skipLabel: "Skip",
+            doneLabel: "Done",
+            nextLabel: "Next",
+            prevLabel: "Previous",
+            overlayOpacity: "0.8"
+        });
+        intro.start();
+    }
 }

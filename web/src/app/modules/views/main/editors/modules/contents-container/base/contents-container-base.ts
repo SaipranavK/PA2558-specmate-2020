@@ -46,8 +46,16 @@ export abstract class ContentContainerBase<T extends IContainer> implements OnIn
         await this.readContents();
     }
 
-    public async create(name: string): Promise<void> {
+    public async create(name: any): Promise<void> {
+        if(name == undefined || name == null || name == "" || name == " " ){
+            console.log("In Default name creation")
+            name = "Default"
+        }
+
+        console.log("Default name is: ", name)
+
         if (name && this.validPattern(name)) {
+            console.log("Valid pattern: ", name)
             const element = await this.createElement(name);
             if (element != undefined) {
                 await this.navigator.navigate(element);

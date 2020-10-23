@@ -25,6 +25,7 @@ import { SelectedElementModule } from '../views/side/modules/selected-element/se
 import { TracingLinksModule } from '../views/side/modules/tracing-links/tracing-links.module';
 import { SpecmateComponent } from './components/specmate.component';
 import { SpecmateRoutingModule } from './routing/specmate-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -60,7 +61,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    ValidationModule
+    ValidationModule,
+    FontAwesomeModule
   ],
   declarations: [
     // COMPONENTS IN THIS MODULE

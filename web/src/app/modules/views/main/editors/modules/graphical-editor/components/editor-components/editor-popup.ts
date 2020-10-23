@@ -49,12 +49,12 @@ export class EditorPopup {
         const deleteText = this.translate.instant('delete');
         menu.addItem(deleteText, null, () => {
             this.graph.removeCells([currentCell]);
-        }, undefined, 'fa fa-trash-o', undefined, undefined);
+        }, undefined, 'fas fa-trash-o', undefined, undefined);
 
         if (Type.is(element, CEGConnection)) {
 
             const connection = element as CEGConnection;
-            const icon = connection.negate ? 'fa fa-check' : 'fa fa-circle-o';
+            const icon = connection.negate ? 'fas fa-check' : 'fas fa-circle-o';
 
             const negateText = this.translate.instant('negated');
             menu.addItem(negateText, null, async () => {

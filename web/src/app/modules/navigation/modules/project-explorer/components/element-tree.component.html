@@ -9,8 +9,8 @@
                         type="button" (click)="toggle()" (keydown)="handleKey($event, false);"
                         title="{{'expand' | translate}}" class="btn btn-sm expand"
                         [style.visibility]="canExpand ? 'visible' : 'hidden'">
-                        <i *ngIf="!expanded" class="fa fa-plus-square-o" aria-hidden="true"></i>
-                        <i *ngIf="expanded" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                        <i *ngIf="!expanded" class="fas fa-plus-square" aria-hidden="true"></i>
+                        <i *ngIf="expanded" class="fas fa-minus-square" aria-hidden="true"></i>
                     </button>
                     <button type="button" *ngIf="!hasLink" type="button" (click)="toggle()"
                         (keydown)="handleKey($event, true);" title="{{element.name}}" class="btn btn-sm">
@@ -28,12 +28,12 @@
                     <button id="{{'recyclebin-' + element.name + '-restoremodel-button'}}"
                         title="{{'restore' | translate}}" (click)="restore()"
                         class="btn btn-sm expand btn-outline-primary">
-                        <i class="fa fa-repeat" aria-hidden="true"></i>
+                        <i class="fas fa-repeat" aria-hidden="true"></i>
                     </button>
                     <button id="{{'recyclebin-' + element.name + '-deletemodel-button'}}"
                         title="{{'delete' | translate}}" (click)="delete()"
                         class="btn btn-sm expand btn-outline-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <i class="fas fa-trash" aria-hidden="true"></i>
                     </button>&nbsp;
                 </td>
             </tr>
@@ -46,7 +46,7 @@
             class="element-tree"></element-tree>
         <li *ngIf="canLoadMore">
             <button (click)="loadMore()" class="btn btn-sm btn-outline-primary">
-                <i class="fa fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
+                <i class="fas fa-ellipsis-v"></i>&nbsp;{{'loadMore' | translate}}
             </button>
         </li>
     </ul>

@@ -1,6 +1,6 @@
-$color-selected: $primary;
-$color-selected-dark: $primary;
-$color-selected-bright: $primary;
+$color-selected: #0275d8;
+$color-selected-dark: #0275d8;
+$color-selected-bright: #0275d8;
 
 $font-size-sm: 0.9375rem;
 
@@ -14,7 +14,7 @@ button,
 }
 
 a {
-  color: $primary;
+  color: #0275d8;
 }
 
 a:focus,
@@ -45,7 +45,7 @@ a.selected {
 }
 
 .project-explorer {
-  background: $white;
+  background: #fff;
   overflow: scroll;
   white-space: nowrap;
   z-index: 1;
@@ -157,8 +157,8 @@ textarea:focus,
 }
 
 .login-form {
-  background: $white;
-  border: 1px solid $gray-400;
+  background: #fff;
+  border: 1px solid #ced4da;
   padding: 16px;
 }
 
@@ -178,7 +178,7 @@ textarea:focus,
 }
 
 .nav-tabs .nav-link.active {
-  color: $primary;
+  color: #0275d8;
   background-color: rgba(0, 0, 0, 0.1);
 }
 

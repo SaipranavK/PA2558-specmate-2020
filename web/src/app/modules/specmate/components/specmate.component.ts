@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewControllerService } from '../../views/controller/modules/view-controller/services/view-controller.service';
 import { AuthenticationService } from '../../views/main/authentication/modules/auth/services/authentication.service';
 
-/**
+/** 
  * This is the Specmate main component
  */
 @Component({

@@ -69,7 +69,9 @@ export class IconSelector implements OnInit {
          return this.parent && (Type.is(this.parent, CEGModel) || Type.is(this.parent, Process));
     }
 
-    constructor(private dataService: SpecmateDataService) { }
+    constructor(private dataService: SpecmateDataService) { 
+       
+    }
 
     public async ngOnInit(): Promise<void> {
         const parentUrl = Url.parent(this.model.url);
