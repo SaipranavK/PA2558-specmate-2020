@@ -1,8 +1,7 @@
 package com.specmate.cause_effect_patterns.parse.matcher;
 
 import com.specmate.cause_effect_patterns.parse.DependencyParsetree;
-import com.specmate.cause_effect_patterns.parse.matcher.MatchResult;
-import com.specmate.cause_effect_patterns.parse.matcher.MatcherBase;
+
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -23,13 +22,15 @@ public class OrMatcher extends MatcherBase{
 	@Override
 	public String getRepresentation() {
 		String result = "(";
+		StringBuilder sb_outer=new StringBuilder();
 		for (MatcherBase matcher : this.getArcChildren()) {
 			if(result.length() > 1) {
-				result+=" | ";
+				StringBuilder sb=new StringBuilder();
+				result+=sb.append(" | ").toString();
 			}
 			result+= matcher.toString();
 		}
-		return result+")";
+		return result+sb_outer.append(")").toString();
 	}
 	
 	@Override

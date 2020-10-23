@@ -2,6 +2,7 @@ package org.json;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.*;
 
 /*
 Copyright (c) 2006 JSON.org
@@ -57,7 +58,7 @@ SOFTWARE.
  * @version 2011-11-24
  */
 public class JSONWriter {
-    private static final int maxdepth = 200;
+    private static final int MAX_DEPTH = 200;
 
     /**
      * The comma flag determines if a comma should be output before the next
@@ -78,7 +79,7 @@ public class JSONWriter {
     /**
      * The object/array stack.
      */
-    private final JSONObject stack[];
+    private final JSONObject[] stack;
 
     /**
      * The stack top index. A value of 0 indicates that the stack is empty.
@@ -96,7 +97,7 @@ public class JSONWriter {
     public JSONWriter(Writer w) {
         this.comma = false;
         this.mode = 'i';
-        this.stack = new JSONObject[maxdepth];
+        this.stack = new JSONObject[MAX_DEPTH];
         this.top = 0;
         this.writer = w;
     }
@@ -260,11 +261,8 @@ public class JSONWriter {
             throw new JSONException("Nesting error.");
         }
         this.top -= 1;
-        this.mode = this.top == 0
-            ? 'd'
-            : this.stack[this.top - 1] == null
-            ? 'a'
-            : 'k';
+        m = this.stack[this.top - 1] == null ? 'a' : 'k';
+        this.mode = this.top == 0 ? 'd' : m;
     }
 
     /**
@@ -273,7 +271,7 @@ public class JSONWriter {
      * @throws JSONException If nesting is too deep.
      */
     private void push(JSONObject jo) throws JSONException {
-        if (this.top >= maxdepth) {
+        if (this.top >= MAX_DEPTH) {
             throw new JSONException("Nesting too deep.");
         }
         this.stack[this.top] = jo;
@@ -300,7 +298,7 @@ public class JSONWriter {
      * @throws JSONException If the number is not finite.
      */
     public JSONWriter value(double d) throws JSONException {
-        return this.value(new Double(d));
+        return this.value(Double.valueOf(d));
     }
 
     /**

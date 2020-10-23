@@ -17,6 +17,7 @@ import org.eclipse.emf.cdo.eresource.CDOResource;
 import org.eclipse.emf.cdo.net4j.CDONet4jSession;
 import org.eclipse.emf.cdo.net4j.CDONet4jUtil;
 import org.eclipse.emf.cdo.net4j.CDOSessionRecoveryEvent;
+import org.eclipse.emf.cdo.net4j.CDOSessionRecoveryEvent.Type;
 import org.eclipse.emf.cdo.net4j.ReconnectingCDOSessionConfiguration;
 import org.eclipse.emf.cdo.server.net4j.CDONet4jServerUtil;
 import org.eclipse.emf.cdo.session.CDOSessionInvalidationEvent;
@@ -200,7 +201,7 @@ public class CDOPersistencyService implements IPersistencyService, IListener {
 		LifecycleUtil.deactivate(connector);
 	}
 
-	private void startPersistency() throws SpecmateException {
+	private void startPersistency() {
 		OMPlatform.INSTANCE.setDebugging(true);
 		OMPlatform.INSTANCE.addLogHandler(PrintLogHandler.CONSOLE);
 		OMPlatform.INSTANCE.addTraceHandler(PrintTraceHandler.CONSOLE);
@@ -235,13 +236,12 @@ public class CDOPersistencyService implements IPersistencyService, IListener {
 			public void notifyEvent(final IEvent event) {
 				if (event instanceof CDOSessionRecoveryEvent) {
 					CDOSessionRecoveryEvent recoveryEvent = (CDOSessionRecoveryEvent) event;
-					switch (recoveryEvent.getType()) {
-					case STARTED:
+					Type STARTED = null;
+					if (recoveryEvent.getType() == STARTED) {
 						logService.log(LogService.LOG_WARNING, "Reconnecting CDO session started.");
-						break;
-					case FINISHED:
+						}
+					else{
 						logService.log(LogService.LOG_WARNING, "Reconnecting CDO session finished.");
-						break;
 					}
 				}
 			}
@@ -334,7 +334,7 @@ public class CDOPersistencyService implements IPersistencyService, IListener {
 		this.transactionGauge.dec();
 	}
 
-	/* package */CDOTransaction openCDOTransaction() throws SpecmateException {
+	/* package */CDOTransaction openCDOTransaction() {
 		CDOTransaction transaction = session.openTransaction();
 		transaction.options().addChangeSubscriptionPolicy(CDOAdapterPolicy.ALL);
 		transaction.options().setInvalidationNotificationEnabled(true);
@@ -343,7 +343,7 @@ public class CDOPersistencyService implements IPersistencyService, IListener {
 		return transaction;
 	}
 
-	/* package */CDOView openCDOView() throws SpecmateException {
+	/* package */CDOView openCDOView() {
 		CDOView view = session.openView();
 		view.options().addChangeSubscriptionPolicy(CDOAdapterPolicy.ALL);
 		view.options().setInvalidationNotificationEnabled(true);
@@ -494,6 +494,7 @@ public class CDOPersistencyService implements IPersistencyService, IListener {
 	}
 
 	public void removeModelProvider(IPackageProvider provider) {
+		//Remove model provider
 	}
 
 	@Reference

@@ -62,7 +62,7 @@ public class CDOPersistencyServiceConfig {
 		this.host = this.configService.getConfigurationProperty(KEY_SERVER_HOST_PORT);
 		this.connected = false;
 		String[] hostport = StringUtils.split(this.host, ":");
-		if (hostport == null || !(hostport.length == 2)) {
+		if (hostport == null || (hostport.length != 2)) {
 			throw new SpecmateInternalException(ErrorCode.CONFIGURATION,
 					"Invalid format for CDO host " + KEY_SERVER_HOST_PORT + ": " + this.host + ". The expected format is [hostName]:[port]");
 		}
@@ -80,6 +80,7 @@ public class CDOPersistencyServiceConfig {
 	 * Starts a thread that periodically checks if the CDO server is still
 	 * reachable
 	 */
+
 	private void startMonitoringThread() {
 
 		this.checkConnectionEexcutor = Executors.newScheduledThreadPool(1);
@@ -96,7 +97,7 @@ public class CDOPersistencyServiceConfig {
 					}
 				}
 			} else {
-				if (checkConnection()) {
+				 {
 					try {
 						this.logService.log(LogService.LOG_INFO, "Connection to CDO server established.");
 						registerConfiguration();
@@ -139,7 +140,6 @@ public class CDOPersistencyServiceConfig {
 	private boolean checkConnection() {
 		try (Socket socket = new Socket()) {
 			socket.connect(new InetSocketAddress(this.hostName, this.port), 5000);
-			socket.close();
 			return true;
 		} catch (IOException e) {
 			return false; // Either timeout or unreachable or failed DNS lookup.

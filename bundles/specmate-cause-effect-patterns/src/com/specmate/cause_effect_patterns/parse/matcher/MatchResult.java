@@ -29,7 +29,7 @@ public class MatchResult {
 	private MatchResult(boolean success, DependencyParsetree matchTree) {
 		this.matchTree = matchTree;
 		this.isSuccessfulMatch = success;
-		this.submatch = new HashMap<String, MatchResult>();
+		this.submatch = new HashMap<>();
 		this.ruleName = Optional.empty();
 	}
 	
@@ -68,8 +68,8 @@ public class MatchResult {
 	}
 
 	public static MatchResult success(DependencyParsetree matchTree) {
-		MatchResult result = new MatchResult(true, matchTree);
-		return result;
+		//MatchResult result = new MatchResult(true, matchTree);
+		return new MatchResult(true, matchTree);
 	}
 	
 	public static MatchResult success() {

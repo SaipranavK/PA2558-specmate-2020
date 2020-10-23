@@ -77,10 +77,8 @@ public class SubtreeMatcher extends MatcherBase {
 			}
 		}
 		
-		if(this.posTag.isPresent()) {
-			if(!head.getPosValue().equals(this.posTag.get())) {
+		if(this.posTag.isPresent() && !head.getPosValue().equals(this.posTag.get())) {
 				return MatchResult.unsuccessful();
-			}
 		}
 		
 		MatchResult res = super.match(data, head);

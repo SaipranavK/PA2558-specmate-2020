@@ -365,8 +365,15 @@ public class JSONTokener {
             case '[':
                 this.back();
                 return new JSONArray(this);
+            default:
+            	return handleUnquotedText(c);
         }
 
+        
+    }
+
+
+	private Object handleUnquotedText(char c) {
         /*
          * Handle unquoted text. This could be the values true, false, or
          * null, or it can be a number. An implementation (such as this one)
@@ -375,8 +382,8 @@ public class JSONTokener {
          * Accumulate characters until we reach the end of the text or a
          * formatting character.
          */
-
-        StringBuilder sb = new StringBuilder();
+		String string;
+		StringBuilder sb = new StringBuilder();
         while (c >= ' ' && ",:]}/\\\"[{;=#".indexOf(c) < 0) {
             sb.append(c);
             c = this.next();
@@ -388,7 +395,7 @@ public class JSONTokener {
             throw this.syntaxError("Missing value");
         }
         return JSONObject.stringToValue(string);
-    }
+	}
 
 
     /**

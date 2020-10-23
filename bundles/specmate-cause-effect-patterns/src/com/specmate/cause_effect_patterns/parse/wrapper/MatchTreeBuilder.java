@@ -13,7 +13,6 @@ public class MatchTreeBuilder {
 		public static final String EFFECT = "Effect";
 		public static final String PART_A = "PartA";
 		public static final String PART_B = "PartB";
-		// public static final String TMP = "TMP";
 		public static final String HEAD = "Head";
 		public static final String CONDITION = "Condition";
 		public static final String VARIABLE = "Variable";
@@ -123,7 +122,7 @@ public class MatchTreeBuilder {
 		if (name != null) {
 			return buildTree(result.getSubmatch(name));
 		}
-		return null;
+		return Optional.empty();
 	}
 
 	private String getSecondArgumentName(MatchResult result) {
@@ -148,7 +147,7 @@ public class MatchTreeBuilder {
 		if (name != null) {
 			return buildTree(result.getSubmatch(name));
 		}
-		return null;
+		return Optional.empty();
 	}
 
 	public RuleType getType(MatchResult result) {
@@ -184,17 +183,25 @@ public class MatchTreeBuilder {
 
 		// Unary
 		if (isNegation(result)) {
+			if(getFirstArgument(result).isPresent())
+			{
 			MatchResultTreeNode clause = getFirstArgument(result).get();
 			return Optional.of(new NegationTreeNode(clause));
+			}
 		}
 
 		// Binary
 		if (isConditionVarible(result) || isVerbObject(result) || isVerbPreposition(result) || isConjunction(result)
 				|| isCondition(result) || isLimitedCondition(result)) {
+			
+			if(getFirstArgument(result).isPresent() && getSecondArgument(result).isPresent())
+			{
+			
 			MatchResultTreeNode left = getFirstArgument(result).get();
 			MatchResultTreeNode right = getSecondArgument(result).get();
 			return Optional.of(new BinaryMatchResultTreeNode(left, right, getType(result)));
-		}
+			}
+			}
 
 		// Just Text
 		LeafTreeNode leaf = new LeafTreeNode(result.getMatchTree().getRepresentationString(false));

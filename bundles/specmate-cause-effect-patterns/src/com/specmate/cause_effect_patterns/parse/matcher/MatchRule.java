@@ -1,7 +1,7 @@
 package com.specmate.cause_effect_patterns.parse.matcher;
 
 import com.specmate.cause_effect_patterns.parse.DependencyParsetree;
-import com.specmate.cause_effect_patterns.parse.matcher.MatcherBase;
+
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 

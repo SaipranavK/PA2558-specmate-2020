@@ -1,7 +1,8 @@
 package com.specmate.cause_effect_patterns.parse.matcher;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
+
 
 import com.specmate.cause_effect_patterns.parse.DependencyParsetree;
 
@@ -16,14 +17,17 @@ public class MatchUtil {
 	 * @return A List of Results for each head of the dependency data object.
 	 */
 	public static List<MatchResult> evaluateRuleset(List<MatchRule> rules, DependencyParsetree data) {
-		Vector<MatchResult> result = new Vector<MatchResult>();
+		List<MatchResult> result = new ArrayList<>();
 		for(Token head: data.getHeads()) {
 			result.add(MatchUtil.evaluateRuleset(rules, data, head));
 		}
 		return result; 
 	}
 	
-	
+	private MatchUtil()
+	{
+		
+	}
 	
 	
 	/**

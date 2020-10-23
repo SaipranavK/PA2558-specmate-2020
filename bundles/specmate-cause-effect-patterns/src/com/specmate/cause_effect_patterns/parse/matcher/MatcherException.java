@@ -2,9 +2,7 @@ package com.specmate.cause_effect_patterns.parse.matcher;
 
 import java.util.Set;
 
-import com.specmate.cause_effect_patterns.parse.matcher.MatcherBase;
-import com.specmate.cause_effect_patterns.parse.matcher.MatcherException;
-import com.specmate.cause_effect_patterns.parse.matcher.SubtreeMatcher;
+
 
 public class MatcherException extends Exception {
 	
@@ -27,8 +25,10 @@ public class MatcherException extends Exception {
 
 	public static MatcherException multipleMatchheads(Set<MatcherBase> headSet) {
 		String message = "Rule has multiple match heads: ";
+		StringBuilder sb=new StringBuilder();
 		for(MatcherBase m: headSet) {
-			message += m+" "; 
+			message+=sb.append(m).append(" ").toString();
+			//message += m+" "; 
 		}
 		return new MatcherException(message);
 	}

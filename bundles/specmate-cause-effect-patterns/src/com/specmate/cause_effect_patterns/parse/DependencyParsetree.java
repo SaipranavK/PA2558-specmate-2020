@@ -97,9 +97,9 @@ public class DependencyParsetree {
 	}
 
 	public DependencyParsetree() {
-		dependencies = new HashMap<Token, DependencyNode>();
-		heads = new HashSet<Token>();
-		treeFragments = new Vector<DependencyParsetree.TextInterval>();
+		dependencies = new HashMap<>();
+		heads = new HashSet<>();
+		treeFragments = new Vector<>();
 		tokenOrder = new SortedIntSet();
 	}
 
@@ -206,11 +206,16 @@ public class DependencyParsetree {
 	@Override
 	public String toString() {
 		String result = "Roots:\n";
-		for(Token root: heads) {
-			result+= "\t"+root.getCoveredText()+"\n";
-		}
 
-		result+="Dependencies:\n";
+		StringBuilder sb_outer=new StringBuilder();
+		
+		for(Token root: heads) {
+			StringBuilder sb=new StringBuilder();
+			//result+= "\t"+root.getCoveredText()+"\n";
+			result+=sb.append("\t").append(root.getCoveredText()).append("\n").toString();
+		}
+		result+=sb_outer.append("Dependencies:\n");
+		//result+="Dependencies:\n";
 		for(Token t: dependencies.keySet()) {
 			result+= "\t"+t.getCoveredText()+"\n";
 			DependencyNode node = getDependencyNode(t);

@@ -1,5 +1,6 @@
 package com.specmate.cause_effect_patterns.parse.matcher;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.uima.internal.util.IntHashSet;
 
@@ -15,9 +15,7 @@ import org.apache.uima.internal.util.IntHashSet;
 import com.google.common.collect.ArrayListMultimap;
 import com.specmate.cause_effect_patterns.parse.DependencyNode;
 import com.specmate.cause_effect_patterns.parse.DependencyParsetree;
-import com.specmate.cause_effect_patterns.parse.matcher.MatchResult;
-import com.specmate.cause_effect_patterns.parse.matcher.MatcherBase;
-import com.specmate.cause_effect_patterns.parse.matcher.MatcherException;
+
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -37,16 +35,14 @@ public abstract class MatcherBase {
 	protected ArrayListMultimap<String, MatcherBase> arcs;
 	
 	public MatcherBase() {
-		this.children = new HashSet<MatcherBase>();
+		this.children = new HashSet<>();
 		this.parent = Optional.empty();
 		this.arcs = ArrayListMultimap.create();
 	}
 	
 	public void arcTo(MatcherBase to, String dependencyTag) throws MatcherException {
-		if(to.parent.isPresent() && this.parent.isPresent()) {
-			if(!to.parent.get().equals(this.parent.get())) {
+		if(to.parent.isPresent() && this.parent.isPresent() && !to.parent.get().equals(this.parent.get())) {
 				throw MatcherException.illegalTwoParentNode(to, this, to.parent.get());
-			}
 		}
 		
 		if (to.children.contains(this)) {
@@ -65,18 +61,28 @@ public abstract class MatcherBase {
 	@Override
 	public String toString() {
 		String result = "";
+		StringBuilder sb=new StringBuilder();
 		for (Entry<String,MatcherBase> arc : arcs.entries()) {
-			result+= this.getRepresentation() +" -- " + arc.getKey()+" --> "+arc.getValue().getRepresentation()+"\n"+arc.getValue();
+			result+=sb.append(this.getRepresentation())
+					.append(" -- ")
+					.append(arc.getKey())
+					.append(arc.getValue().getRepresentation()).
+					append("\n").append(arc.getValue()).toString();
+			//result+= this.getRepresentation() +" -- " + arc.getKey()+" --> "+arc.getValue().getRepresentation()+"\n"+arc.getValue();
 		}
 		return result.trim();
 	}
 	
+	public static final String  representation="Matcher";
+	
 	public String getRepresentation() {
-		return "Matcher";
+		return representation;
 	}
 
 	public List<MatchResult> match(DependencyParsetree data) {
-		Vector<MatchResult> result = new Vector<MatchResult>();
+		
+		List<MatchResult> result=new ArrayList<>();
+//		Vector<MatchResult> result = new Vector<MatchResult>();
 		for (Token head: data.getHeads()) {
 			result.add(this.match(data, head));
 		}
@@ -158,7 +164,7 @@ public abstract class MatcherBase {
 		}
 		
 		MatchResult result = MatchResult.success(unmatched);
-		for (int i = 0; i < matching.matching.length; i++) {
+		for (int i = 0; i < matching.matching_var.length; i++) {
 			if(this instanceof SubtreeMatcher && matchers.get(i) instanceof SubtreeMatcher) {
 				// We group together subtrees with the same prefix
 				// Like Cause and Cause_B get grouped together in a single Cause
@@ -170,7 +176,7 @@ public abstract class MatcherBase {
 				
 				if(treeA.startsWith(treeB+"_") || treeB.startsWith(treeA+"_") || prefA.equals(prefB)) {
 					DependencyParsetree subMatch = matching.getResult(i).getSubmatch(treeB).getMatchTree();
-					Dependency subDep = candidates.get(matching.matching[i]);
+					Dependency subDep = candidates.get(matching.matching_var[i]);
 					subMatch.addDependency(subDep);
 				}
 			}
@@ -190,7 +196,7 @@ public abstract class MatcherBase {
 		while(currentMatcherIndex < matchSize) {
 			MatcherBase currentMatcher = matchers.get(currentMatcherIndex);
 			boolean unmatched = true;
-			for(int i = result.matching[currentMatcherIndex]; i < candidateSize; i++) {
+			for(int i = result.matching_var[currentMatcherIndex]; i < candidateSize; i++) {
 				if (result.isAvailable(i)) {
 					if(result.matchResults[currentMatcherIndex][i] == null) {
 						Token subHead = candidates.get(i).getDependent();
@@ -208,7 +214,7 @@ public abstract class MatcherBase {
 						
 						break;
 					} else {
-						result.matching[currentMatcherIndex]++;
+						result.matching_var[currentMatcherIndex]++;
 					}
 				}
 			}
@@ -228,30 +234,30 @@ public abstract class MatcherBase {
 	private class Matching {
 		public MatchResult[][] matchResults;
 		private IntHashSet availableCandidates;
-		public int[] matching;
+		public int[] matching_var;
 		
 		public Matching(int matchSize, int candidateSize) {
 			this.matchResults = new MatchResult[matchSize][candidateSize];
 			this.availableCandidates = new IntHashSet(candidateSize);
-			this.matching = new int[matchSize];
+			this.matching_var = new int[matchSize];
 			
 			for(int i=0; i<candidateSize; i++) {
 				// We add 1 to all elements because IntHashSet does not allow any element to be 0.
 				this.availableCandidates.add(i+1);
 				if(i < matchSize) {
-					this.matching[i] = 0;
+					this.matching_var[i] = 0;
 				}
 			}
 		}
 		
 		public void unmatch(int index) {
-			this.matching[index] = 0;
-			availableCandidates.add(1+this.matching[index - 1]);
-			this.matching[index - 1]++;
+			this.matching_var[index] = 0;
+			availableCandidates.add(1+this.matching_var[index - 1]);
+			this.matching_var[index - 1]++;
 		}
 
 		public void setMatch(int currentMatcherIndex, int i) {
-			matching[currentMatcherIndex] = i;
+			matching_var[currentMatcherIndex] = i;
 			availableCandidates.remove(i+1);
 		}
 
@@ -269,7 +275,7 @@ public abstract class MatcherBase {
 		}
 		
 		public MatchResult getResult(int i) {
-			return this.matchResults[i][this.matching[i]];
+			return this.matchResults[i][this.matching_var[i]];
 		}
 	}
 }

@@ -64,7 +64,7 @@ public class BaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(final int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case BasePackage.IID: {
 				IID iid = (IID)theEObject;

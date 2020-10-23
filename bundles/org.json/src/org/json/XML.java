@@ -316,14 +316,15 @@ public class XML {
         try {
             char initial = string.charAt(0);
             if (initial == '-' || (initial >= '0' && initial <= '9')) {
-                Long value = new Long(string);
+            	
+                Long value = Long.parseLong(string);
                 if (value.toString().equals(string)) {
                     return value;
                 }
             }
         }  catch (Exception ignore) {
             try {
-                Double value = new Double(string);
+                Double value = Double.parseDouble(string);
                 if (value.toString().equals(string)) {
                     return value;
                 }

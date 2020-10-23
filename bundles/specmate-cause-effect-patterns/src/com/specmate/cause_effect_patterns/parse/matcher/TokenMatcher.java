@@ -3,8 +3,7 @@ package com.specmate.cause_effect_patterns.parse.matcher;
 import java.util.Optional;
 
 import com.specmate.cause_effect_patterns.parse.DependencyParsetree;
-import com.specmate.cause_effect_patterns.parse.matcher.MatchResult;
-import com.specmate.cause_effect_patterns.parse.matcher.MatcherBase;
+
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -49,10 +48,8 @@ public class TokenMatcher extends MatcherBase{
 			return MatchResult.unsuccessful();
 		}
 		
-		if(this.posTag.isPresent()) {
-			if(!head.getPosValue().equals(this.posTag.get())) {
+		if(this.posTag.isPresent() && !head.getPosValue().equals(this.posTag.get())) {
 				return MatchResult.unsuccessful();
-			}
 		}
 		return super.match(data, head);
 	}

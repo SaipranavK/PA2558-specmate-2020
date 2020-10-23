@@ -65,8 +65,8 @@ public class RequirementsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected boolean isSwitchFor(EPackage ePackage) {
-		return ePackage == modelPackage;
+  protected boolean isSwitchFor(final EPackage ePackage) {
+		return ePackage.equals(modelPackage);
 	}
 
 	/**
@@ -77,11 +77,12 @@ public class RequirementsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T doSwitch(final int classifierID, EObject theEObject) {
+		T result = null;
 		switch (classifierID) {
 			case RequirementsPackage.REQUIREMENT: {
-				Requirement requirement = (Requirement)theEObject;
-				T result = caseRequirement(requirement);
+				final Requirement requirement = (Requirement)theEObject;
+				result = caseRequirement(requirement);
 				if (result == null) result = caseISpecmateModelObject(requirement);
 				if (result == null) result = caseIExternal(requirement);
 				if (result == null) result = caseIContainer(requirement);
@@ -92,11 +93,10 @@ public class RequirementsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseIDescribed(requirement);
 				if (result == null) result = caseIRecycled(requirement);
 				if (result == null) result = defaultCase(theEObject);
-				return result;
 			}
 			case RequirementsPackage.CEG_MODEL: {
-				CEGModel cegModel = (CEGModel)theEObject;
-				T result = caseCEGModel(cegModel);
+				final CEGModel cegModel = (CEGModel)theEObject;
+				result = caseCEGModel(cegModel);
 				if (result == null) result = caseISpecmateModelObject(cegModel);
 				if (result == null) result = caseIContainer(cegModel);
 				if (result == null) result = caseITracingElement(cegModel);
@@ -106,11 +106,10 @@ public class RequirementsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseIDescribed(cegModel);
 				if (result == null) result = caseIRecycled(cegModel);
 				if (result == null) result = defaultCase(theEObject);
-				return result;
 			}
 			case RequirementsPackage.CEG_NODE: {
-				CEGNode cegNode = (CEGNode)theEObject;
-				T result = caseCEGNode(cegNode);
+				final CEGNode cegNode = (CEGNode)theEObject;
+				result = caseCEGNode(cegNode);
 				if (result == null) result = caseIModelNode(cegNode);
 				if (result == null) result = caseISpecmatePositionableModelObject(cegNode);
 				if (result == null) result = caseISpecmateModelObject(cegNode);
@@ -122,11 +121,10 @@ public class RequirementsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseIDescribed(cegNode);
 				if (result == null) result = caseIRecycled(cegNode);
 				if (result == null) result = defaultCase(theEObject);
-				return result;
 			}
 			case RequirementsPackage.CEG_CONNECTION: {
 				CEGConnection cegConnection = (CEGConnection)theEObject;
-				T result = caseCEGConnection(cegConnection);
+				result = caseCEGConnection(cegConnection);
 				if (result == null) result = caseIModelConnection(cegConnection);
 				if (result == null) result = caseISpecmateModelObject(cegConnection);
 				if (result == null) result = caseIContainer(cegConnection);
@@ -137,14 +135,14 @@ public class RequirementsSwitch<T> extends Switch<T> {
 				if (result == null) result = caseIDescribed(cegConnection);
 				if (result == null) result = caseIRecycled(cegConnection);
 				if (result == null) result = defaultCase(theEObject);
-				return result;
 			}
-			default: return defaultCase(theEObject);
+			default: result = defaultCase(theEObject);
 		}
+		return result;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Requirement</em>'.
+	 * Returns the result of interpreting
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
@@ -154,7 +152,7 @@ public class RequirementsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRequirement(Requirement object) {
+	public T caseRequirement(final Requirement object) {
 		return null;
 	}
 
@@ -169,7 +167,7 @@ public class RequirementsSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCEGModel(CEGModel object) {
+	public T caseCEGModel(final CEGModel object) {
 		return null;
 	}
 
@@ -285,7 +283,7 @@ public class RequirementsSwitch<T> extends Switch<T> {
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>IContainer</em>'.
+	 * @return the result of interpreting of'<em>IContainer</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
@@ -395,7 +393,7 @@ public class RequirementsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	@Override
-	public T defaultCase(EObject object) {
+	public T defaultCase(final EObject object) {
 		return null;
 	}
 
